@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Generator</title>
+</head>
+<body>
+    <h1>Random Number Generator</h1>
+    <p>Random number: <span id="random-number">Waiting...</span></p>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        const socket = io("http://localhost:8000");
+
+        socket.on("random_number", (data) => {
+            document.getElementById("random-number").textContent = data.number;
+        });
+    </script>
+</body>
+</html>
