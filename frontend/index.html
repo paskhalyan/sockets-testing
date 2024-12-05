@@ -6,15 +6,23 @@
     <title>Random Number Generator</title>
 </head>
 <body>
-    <h1>Random Number Generator</h1>
-    <p>Random number: <span id="random-number">Waiting...</span></p>
-    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-    <script>
-        const socket = io("http://localhost:8000");
+<h1>Random Number Generator</h1>
+<p>Random number: <span id="random-number">Waiting...</span></p>
 
-        socket.on("random_number", (data) => {
-            document.getElementById("random-number").textContent = data.number;
-        });
-    </script>
+<p>Last printed name: <span id="printed-name">None</span></p>
+
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script>
+    const socket = io("http://localhost:8000");
+
+    socket.on("random_number", (data) => {
+        document.getElementById("random-number").textContent = data.number;
+    });
+
+    socket.on("print_name", (data) => {
+        document.getElementById("printed-name").textContent = data.name;
+    });
+
+</script>
 </body>
 </html>

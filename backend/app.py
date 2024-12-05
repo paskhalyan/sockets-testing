@@ -35,6 +35,12 @@ fastapi_app = FastAPI(lifespan=lifespan)
 async def root():
     return {"message": "FastAPI with Socket.IO"}
 
+@fastapi_app.post("/print-name/{name}")
+async def print_name(name: str):
+    print(f"Printing name: {name}")
+    await sio.emit("print_name", {"name": name})
+    return {"message": f"Name {name} has been sent to the frontend"}
+
 
 app = socketio.ASGIApp(sio, other_asgi_app=fastapi_app)
 
